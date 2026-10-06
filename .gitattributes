@@ -1,0 +1,4 @@
+# keep byte-exact: the patch carries the source file's Windows (CRLF) line endings
+src/kernel/kernel-changes.patch -text
+src/kernel/kernel.config -text
+src/kernel/BASE_COMMIT.txt -text

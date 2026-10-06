@@ -1,0 +1,9 @@
+*.img
+*.zip
+*.partial
+work/
+__pycache__/
+*.pyc
+*.so
+*.ko
+*.tgz
