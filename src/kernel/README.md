@@ -69,3 +69,20 @@ the same file.
 **[VERIFY]** The md5 match was proven in the author's own working tree (a clean upstream checkout with only this one source file changed, the same configuration and toolchain), and `kernel-changes.patch` was checked to reproduce that source file exactly from the upstream one. A rebuild from a fresh clone with exactly the commands above has not been run yet.
 
 The stripped module is then copied to `lib/modules/imgsensor_isp6s.ko` inside a copy of the stock `vendor_dlkm` image.
+## Cherry-pick the driver change
+
+The kernel change is a single commit on top of LineageOS `lineage-23.2` at
+`2a873a3511ee0eeead1442e60145093192a4535d`, published at
+https://github.com/bellhopsw/android_kernel_xelex_mt6789 on branch `q25-50mp`
+(commit `c4c1b8e14abe241a71c34ad6169414745193be9f`). It touches one file,
+`drivers/misc/mediatek/imgsensor/src/common/v1_1/s5kjn1_mipi_raw/s5kjn1mipiraw_Sensor.c`.
+
+```
+git remote add q25 https://github.com/bellhopsw/android_kernel_xelex_mt6789.git
+git fetch q25 q25-50mp
+git cherry-pick c4c1b8e14abe241a71c34ad6169414745193be9f
+```
+
+It applies cleanly to the base commit above; on other trees you may need to
+resolve conflicts by hand. The `kernel-changes.patch` in this folder produces
+the same file.
