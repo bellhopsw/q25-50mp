@@ -32,3 +32,7 @@ Turn on the Camera2 API in Open Camera's settings and restart the app. If the si
 
 **Which firmware do I need?**
 `OS-new-camera-0120-Q25-GMS` (the With-GMS build, firmware id `Q25_20.01.2026`) from Zinwa's shared Drive folder. The tools refuse any other build.
+
+**Can I use the kernel change in my own tree?**
+Yes. It is a single commit on LineageOS `lineage-23.2`. See "Cherry-pick the
+driver change" in `src/kernel/README.md`.
