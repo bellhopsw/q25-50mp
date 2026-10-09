@@ -7,6 +7,7 @@ Not needed to install the release. These are for building a release and checking
 | `build_release.py` | turns known-good images into a release folder (patches, `manifest.json`, `SHA256SUMS`) and proves each patch by rebuilding the patched image from the stock one |
 | `scan_strings.py` | looks for local paths and user names inside binary files (images, libraries, modules) before you publish them |
 | `bytediff.py` | lists exactly which bytes differ between two same-size files (used to document the library patches in `src/hal/`) |
+| `patch_hal.py` | applies the 62 documented HAL byte edits to copies of the three libmtkcam libraries and refuses to write unless sizes and old bytes match; reproduces the released libraries byte for byte on With-GMS stock |
 | `tests/` | automatic checks of the tools on synthetic images (no phone or firmware needed) |
 
 ## Before every release: check what is in the image
