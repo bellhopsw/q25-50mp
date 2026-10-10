@@ -230,12 +230,18 @@ def process_image(label, stock, out_path, fn, check_only):
 
 
 def copy_verified(src, dst):
-    """Copy src to dst and prove the copy: the file you will flash must be exactly the file that was built and checked."""
-    shutil.copyfile(src, dst)
-    want, got = digest(src, "sha256"), digest(dst, "sha256")
-    if want != got:
-        os.remove(dst)
-        raise Refuse("the copy %s does not match the original (sha256 %s, expected %s)" % (dst, got[:16], want[:16]))
+    """Copy src to dst and prove the copy: the file you will flash must be exactly the file that was built and checked.
+    The copy goes to a .part file first and only replaces dst once it is verified, so an existing dst is never damaged."""
+    tmp = dst + ".part"
+    try:
+        shutil.copyfile(src, tmp)
+        want, got = digest(src, "sha256"), digest(tmp, "sha256")
+        if want != got:
+            raise Refuse("the copy %s does not match the original (sha256 %s, expected %s)" % (dst, got[:16], want[:16]))
+        os.replace(tmp, dst)
+    finally:
+        if os.path.exists(tmp):
+            os.remove(tmp)
     return want
 
 
@@ -475,8 +481,10 @@ def main(argv=None):
             os.makedirs(undo_dir, exist_ok=True)
             for src, dst in ((work_v, final_v), (work_d, final_d),
                              (stock_v, os.path.join(undo_dir, "vendor.img")), (stock_d, os.path.join(undo_dir, "vendor_dlkm.img"))):
-                CREATED.append(dst)
+                existed = os.path.exists(dst)
                 copy_verified(src, dst)
+                if not existed:
+                    CREATED.append(dst)       # only files this run created are removed again if something fails later
             uid = os.environ.get("SUDO_UID")
             for root_, _d, files in os.walk(out):
                 for name in files + [""]:

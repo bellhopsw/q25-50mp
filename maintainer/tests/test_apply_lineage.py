@@ -273,6 +273,7 @@ class ZipModeTests(unittest.TestCase):
         src = os.path.join(self.tmp, "a.img"); dst = os.path.join(self.tmp, "b.img")
         wr(src, b"x" * 5000)
         real = A.shutil.copyfile
+
         def broken(s_, d_):
             real(s_, d_)
             with open(d_, "r+b") as f:
@@ -284,6 +285,31 @@ class ZipModeTests(unittest.TestCase):
         finally:
             A.shutil.copyfile = real
         self.assertFalse(os.path.exists(dst))
+        self.assertFalse(os.path.exists(dst + ".part"))
+
+    def test_copy_verified_never_damages_an_existing_file(self):
+        src = os.path.join(self.tmp, "a.img"); dst = os.path.join(self.tmp, "b.img")
+        wr(src, b"new" * 1000); wr(dst, b"OLD GOOD FILE")
+        real = A.shutil.copyfile
+
+        def broken(s_, d_):
+            real(s_, d_)
+            with open(d_, "r+b") as f:
+                f.write(b"Y")
+        A.shutil.copyfile = broken
+        try:
+            with self.assertRaises(A.Refuse):
+                A.copy_verified(src, dst)
+        finally:
+            A.shutil.copyfile = real
+        self.assertEqual(rd(dst), b"OLD GOOD FILE")             # the previous file is untouched
+
+    def test_copy_verified_replaces_an_existing_file_when_good(self):
+        src = os.path.join(self.tmp, "a.img"); dst = os.path.join(self.tmp, "b.img")
+        wr(src, b"new" * 1000); wr(dst, b"old")
+        A.copy_verified(src, dst)
+        self.assertEqual(rd(dst), b"new" * 1000)
+        self.assertFalse(os.path.exists(dst + ".part"))
 
     # ---- the .ps1 files
     def test_write_scripts_files(self):
