@@ -32,5 +32,5 @@ The scripts are in the `tools` folder of the repository.
 * Needs an unlocked bootloader and disabled verified boot. The boot screen shows an orange warning; that is normal.
 
 ## Known gaps
-* Install steps for the unlock, the re-lock and turning verified boot back on come from the author's notes and are marked `[VERIFY]`.
-* Not yet tested by anyone other than the author; not tested from a factory-reset phone.
+* Install steps for the unlock, the re-lock and turning verified boot back on come from my notes and are marked `[VERIFY]`.
+* Not yet tested by anyone other than me; not tested from a factory-reset phone.

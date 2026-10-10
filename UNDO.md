@@ -1,6 +1,6 @@
 # Q25 50MP: undo guide (v0.1.0-alpha, DRAFT)
 
-Work from the mildest option to the most drastic one. The `.\adb` and `.\fastboot` commands must be run in PowerShell **inside the platform-tools folder** (see "How to run the commands" in INSTALL.md). Steps marked **[VERIFY]** come from the author's notes and have not been followed by anyone else yet.
+Work from the mildest option to the most drastic one. The `.\adb` and `.\fastboot` commands must be run in PowerShell **inside the platform-tools folder** (see "How to run the commands" in INSTALL.md). Steps marked **[VERIFY]** come from my notes and have not been followed by anyone else yet.
 
 ## 1. Remove the mod (the phone still boots, or you can reach fastbootd)
 You need the stock images from Part 4 of INSTALL.md (`vendor_a.img` and `vendor_dlkm_a.img`, with the hashes listed there).

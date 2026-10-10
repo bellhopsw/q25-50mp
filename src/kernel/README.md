@@ -66,7 +66,7 @@ It applies cleanly to the base commit above; on other trees you may need to
 resolve conflicts by hand. The `kernel-changes.patch` in this folder produces
 the same file.
 ```
-**[VERIFY]** The md5 match was proven in the author's own working tree (a clean upstream checkout with only this one source file changed, the same configuration and toolchain), and `kernel-changes.patch` was checked to reproduce that source file exactly from the upstream one. A rebuild from a fresh clone with exactly the commands above has not been run yet.
+**[VERIFY]** The md5 match was proven in my own working tree (a clean upstream checkout with only this one source file changed, the same configuration and toolchain), and `kernel-changes.patch` was checked to reproduce that source file exactly from the upstream one. A rebuild from a fresh clone with exactly the commands above has not been run yet.
 
 The stripped module is then copied to `lib/modules/imgsensor_isp6s.ko` inside a copy of the stock `vendor_dlkm` image.
 ## Cherry-pick the driver change

@@ -9,7 +9,7 @@
 - **How:** a patched kernel camera driver, patched camera HAL libraries, and a remosaic library written from scratch in C.
 - **Speed:** about 2.3 s per photo once warmed up (about 3 s during the first ~8 shots while it calibrates).
 - **The honest summary:** the 50MP files are clean and carry real fine detail, but they are soft out of the box. They are best for cropping and for well-lit scenes. With a little sharpening in post, small print comes out finer than from the 12.5MP mode. In dim light the 12.5MP mode can look punchier.
-- **Status:** experimental alpha, working on the author's phone (firmware 0120). The patch tools and the install and undo guides are in the GitHub repository (github.com/bellhopsw/q25-50mp).
+- **Status:** experimental alpha, working on my phone (firmware 0120). The patch tools and the install and undo guides are in the GitHub repository (github.com/bellhopsw/q25-50mp).
 
 
 ## Why it was hard
